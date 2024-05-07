@@ -41,7 +41,7 @@ namespace MinhaLojaVirtual.Infra.Context
                 Entity.Property(u => u.value)
                     .IsRequired(true);
 
-                Entity.Property(u => u.quantidade)
+                Entity.Property(u => u.quantity)
                     .IsRequired(true);
 
                 Entity.Property(u => u.isActive)

@@ -1,0 +1,48 @@
+﻿@{
+    model ProductModel;
+}
+@using (Html.BeginForm("Create", "Product", FormMethod.Post))
+{
+    <div class="card card-info">
+        <div class="card-header">
+            <h4 class="card-title">Criar Produto</h4>
+        </div>
+
+        <form class="form-horizontal">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label for="name" class="col-lg-2 col-form-label">Nome</label>
+                            <div class="col-lg-12">
+                                @Html.TextBoxFor(model => model.name)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label for="value" class="col-md-2 col-form-label">Preço</label>
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(model => model.)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label for="quantity" class="col-md-5 col-form-label">Quantidade</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="quantity" placeholder="quantidade">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-default float-right">Limpar</button>
+                <button type="submit" value="Filtrar" class="btn btn-info">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+
+    <input type="submit" value="Salvar" />
+}

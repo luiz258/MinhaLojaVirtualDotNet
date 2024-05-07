@@ -21,7 +21,7 @@
         public string description { get; set; }
         public bool isActive { get; set; }
 
-        public int quantidade { get; set; }
+        public int quantity { get; set; }
 
 
     }
