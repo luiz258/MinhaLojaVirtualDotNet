@@ -28,16 +28,16 @@ namespace MinhaLojaVirtual.Infra.Repository
             return await _context.Users.FirstOrDefaultAsync(u => u.id == id);
         }
 
-        public async Task Save(UserModel user)
+        public async Task Save(UserModel model)
         {
-           await _context.Users.AddAsync(user);
-           await _context.Users.SaveChange''Async();
+           await _context.Users.AddAsync(model);
+           await _context.SaveChangesAsync();
         }
 
-        public async Task Update(UserModel user)
+        public async Task Update(UserModel model)
         {
-            await _context.Users.Update(user);
-            await _context.Users.SaveChange();
+            _context.Set<UserModel>().Update(model);
+            await _context.SaveChangesAsync();
         }
     }
 }

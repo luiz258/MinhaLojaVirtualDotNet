@@ -5,8 +5,8 @@ namespace MinhaLojaVirtual.Infra.IRepository
 {
     public interface IUserRepository
     {
-        Task Save(UserModel user);
-        Task Update(UserModel user);
+        Task Save(UserModel model);
+        Task Update(UserModel model);
         Task<UserModel> GetbyId(Guid id);
         Task<UserModel> GetbyEmail(string email);
         
