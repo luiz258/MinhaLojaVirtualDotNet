@@ -9,6 +9,6 @@ namespace MinhaLojaVirtual.Infra.IRepository
         Task Update(ProductModel model);
         Task<ProductModel> getById(Guid id);
         Task<IEnumerable<ProductModel>> GetAll();
-        Task<IEnumerable<ProductModel>> GetFilteredProducts(Expression<Func<ProductModel, bool>> filter = null);
+        Task<IEnumerable<ProductModel>> GetFilteredProducts(int quantity = 0, double value = 0,string name = null);
     }
 }

@@ -25,16 +25,26 @@ namespace MinhaLojaVirtual.Infra.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ProductModel>> GetFilteredProducts(Expression<Func<ProductModel, bool>> filter = null)
+        public async Task<IEnumerable<ProductModel>> GetFilteredProducts(int quantity = 0, double value = 0, string name = null)
         {
             IQueryable<ProductModel> query = _context.Set<ProductModel>();
 
-            if (filter != null)
+            if (!string.IsNullOrEmpty(name))
             {
-                query = query.Where(filter);
+                query = query.Where(p => p.name.Contains(name));
             }
 
-            return await query.ToListAsync();
+            if (value>0)
+            {
+                query = query.Where(p => p.value == value);
+            }
+
+            if (quantity > 0)
+            {
+                query = query.Where(p => p.quantity == quantity);
+            }
+
+            return await query.Take(10).ToListAsync();
         }
 
         public async Task Save(ProductModel model)
