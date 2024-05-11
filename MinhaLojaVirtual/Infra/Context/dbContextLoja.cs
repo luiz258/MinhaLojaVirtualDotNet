@@ -5,8 +5,8 @@ using MinhaLojaVirtual.Models;
 
 namespace MinhaLojaVirtual.Infra.Context
 {
-    public class dbContextLoja : DbContext
-    {
+    public class dbContextLoja: DbContext
+    {s
         public dbContextLoja()
         {
 

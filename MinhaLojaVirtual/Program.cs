@@ -16,16 +16,10 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddDbContext<dbContextLoja>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//builder.Services.AddIdentity<UserModel, IdentityRole>()
-//     .AddEntityFrameworkStores<dbContextLoja>()
-//    .AddDefaultTokenProviders();
-
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-//builder.Services.AddScoped<UserManager<UserModel>>();
-//builder.Services.AddScoped<SignInManager<UserModel>>();
 
-var app = builder.Build();
+var app = builder.Build();s
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
