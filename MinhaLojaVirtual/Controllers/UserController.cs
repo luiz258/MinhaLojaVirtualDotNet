@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MinhaLojaVirtual.Infra.IRepository;
 using MinhaLojaVirtual.Models;
@@ -9,9 +10,14 @@ namespace MinhaLojaVirtual.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly UserManager<UserModel> _userManager;
+        private readonly SignInManager<UserModel> _signInManager;
+
+        public UserController(IUserRepository userRepository, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
         {
-            _userRepository = userRepository;   
+            _userRepository = userRepository;
+            _signInManager = signInManager;
+            _userManager = userManager; 
         }
 
         // GET: UserController
@@ -20,6 +26,33 @@ namespace MinhaLojaVirtual.Controllers
 
 
             return View();
+        }
+
+        // POST: UserController
+        [HttpPost]
+        public async Task<IActionResult> Index(UserModel model, string returnUrl = null)
+        {
+            try
+            {
+                returnUrl ??= Url.Content("~/");
+
+                if (ModelState.IsValid)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(model.email, model.password, true, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    ModelState.AddModelError(string.Empty, "Tentativa de login inválida.");
+                    return View(model);
+                }
+                return View(model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // GET: UserController/Details/5
@@ -36,7 +69,7 @@ namespace MinhaLojaVirtual.Controllers
 
         // POST: UserController/Create
         [HttpPost]
-        public async  Task<IActionResult> Create(UserModel model)
+        public async Task<IActionResult> Create(UserModel model)
         {
             try
             {

@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MinhaLojaVirtual.Models;
 
 namespace MinhaLojaVirtual.Infra.Context
 {
-    public class dbContextLoja: DbContext
+    public class dbContextLoja : DbContext
     {
         public dbContextLoja()
         {

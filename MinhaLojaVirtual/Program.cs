@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MinhaLojaVirtual.Infra.Context;
 using MinhaLojaVirtual.Infra.IRepository;
 using MinhaLojaVirtual.Infra.Repository;
+using MinhaLojaVirtual.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +16,14 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddDbContext<dbContextLoja>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//builder.Services.AddIdentity<UserModel, IdentityRole>()
+//     .AddEntityFrameworkStores<dbContextLoja>()
+//    .AddDefaultTokenProviders();
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+//builder.Services.AddScoped<UserManager<UserModel>>();
+//builder.Services.AddScoped<SignInManager<UserModel>>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -35,6 +42,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
